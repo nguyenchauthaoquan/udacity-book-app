@@ -9,7 +9,7 @@ if (!token) token = localStorage.token = Math.random().toString(36).substring(-8
 
 const headers = {
   Accept: "application/json",
-  //Authorization: token,
+  Authorization: token,
 };
 
 export const get = async (bookId: string) =>
