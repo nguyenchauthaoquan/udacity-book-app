@@ -5,14 +5,14 @@ const api = "https://reactnd-books-api.udacity.com";
 
 let token = localStorage.token;
 
-if (!token) token = localStorage.token = Math.random().toString(36).substr(-8);
+if (!token) token = localStorage.token = Math.random().toString(36).substring(-8);
 
 const headers = {
   Accept: "application/json",
-  Authorization: token,
+  //Authorization: token,
 };
 
-export const get = async (bookId: any) =>
+export const get = async (bookId: string) =>
   axios.get(`${api}/books/${bookId}`, { headers })
     .then((res) => res.data)
     .then((data) => data.book);
@@ -26,7 +26,7 @@ export const getAll = async (): Promise<Book[]> => {
 }
 
 
-export const update = async (book: any, shelf: any) =>
+export const update = async (book: Book, shelf: string) =>
   await axios.put(`${api}/books/${book.id}`, {
     headers: {
       ...headers,
@@ -35,14 +35,13 @@ export const update = async (book: any, shelf: any) =>
     body: JSON.stringify({ shelf }),
   }).then((res) => res.data);
 
-export const search = (query: any, maxResults: any) =>
-  fetch(`${api}/search`, {
-    method: "POST",
+export const search = (query: string, maxResults: string) =>
+  axios.post(`${api}/search`, {
     headers: {
       ...headers,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ query, maxResults }),
   })
-    .then((res) => res.json())
+    .then((res) => res.data)
     .then((data) => data.books);

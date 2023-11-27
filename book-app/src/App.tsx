@@ -7,8 +7,8 @@ import { Book } from './models/services/Book';
 
 function App() {
     const [showSearchPage, setShowSearchPage] = useState(false);
-    let books: Book[] | undefined  = useQuery("books", getAll).data;
-    let book: Book =useQuery(["book", "nggnmAEACAAJ"], () => get("nggnmAEACAAJ")).data;
+    const { data: books } : { data: Book[] | undefined}  = useQuery("books", getAll);
+    const { data: book }: { data: Book | undefined } = useQuery(["book", "nggnmAEACAAJ"], () => get("nggnmAEACAAJ"));
 
 
     console.log(books)
