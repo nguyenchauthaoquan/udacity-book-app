@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Book } from "./models/services/Book";
+import { Book } from "../models/services/Book.ts";
 
 const api = "https://reactnd-books-api.udacity.com";
 
