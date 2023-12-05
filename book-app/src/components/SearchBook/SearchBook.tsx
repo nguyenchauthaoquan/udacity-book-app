@@ -46,8 +46,6 @@ const SearchBook : FC<SearchBookProps> = (props: SearchBookProps) => {
                             <BookItem key={book.id} book={book} shelf={book.shelf} handleUpdate={(book: Book, shelf: string) => props.handleUpdate(book, shelf)} />
                         )
                     }
-                    <li>a</li>
-                    <li>b</li>
                 </ol>
             </div>
         </div>
