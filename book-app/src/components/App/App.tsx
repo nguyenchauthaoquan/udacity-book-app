@@ -1,7 +1,5 @@
-// import {  useState } from 'react'
 import {Route, Routes} from "react-router-dom";
 import { useQuery } from 'react-query'
-
 import {getAll, search, update} from "../../services/BooksAPI.ts"
 import '../../assets/styles/css/App.css'
 import { Book } from '../../models/services/Book.ts';
@@ -48,43 +46,6 @@ function App() {
                 <Route path={"/"} element={<ListBooks books={booksState} shelves={BookShelves} handleUpdate={(book: Book, shelf: string) => handleUpdate(book, shelf)} />} />
                 <Route path={"search"} element={<SearchBook searchedBook={searchedBook} books={booksState} handleSearch={handleSearchBook} handleUpdate={(book: Book, shelf: string) => handleUpdate(book, shelf)} handleResetSearch={() => handleResetSearch()} />} />
             </Routes>
-            {
-                /*
-                showSearchPage ? (
-                    <div className="search-books">
-                        <div className="search-books-bar">
-                            <button
-                                className="close-search"
-                                onClick={() => setShowSearchPage(!showSearchPage)}
-                            >
-                                Close
-                            </button>
-                            <div className="search-books-input-wrapper">
-                                <input
-                                    type="text"
-                                    placeholder="Search by title, author, or ISBN"
-                                />
-                            </div>
-                        </div>
-                        <div className="search-books-results">
-                            <ol className="books-grid">
-                                <li>a</li>
-                                <li>b</li>
-                            </ol>
-                        </div>
-                    </div>
-                ) : (
-                    <>
-                        <ListBooks books={books} shelves={BookShelves} />
-                        <div className="open-search">
-                            <button onClick={() => setShowSearchPage(!showSearchPage)}>Add a book</button>
-                        </div>
-                    </>
-                )
-                
-                 */
-            }
-            
         </div>
     );
 }
