@@ -8,17 +8,23 @@ export type ErrorBoundaryProps = {
 export type ListBooksProps = {
     books: Book[];
     shelves: object;
-    //handleMoveBook: (book: Book, shelf: string) => void;
+    handleUpdate: (book: Book, shelf: string) => void;
 }
 
 export type BookShelfProps = {
     shelf: string;
     books: Book[];
-    //handleMoveBook: (book: Book, shelf: string) => void;
+    handleUpdate: (book: Book, shelf: string) => void;
 }
 
 export type BookProps = {
     book: Book;
     shelf: string;
-    //handleMoveBook: (book: Book, shelf: string) => void;
+    handleUpdate: (book: Book, shelf: string) => void;
+}
+
+export type BookShelfChangerProps = {
+    book: Book;
+    shelf: string;
+    handleUpdate: (book: Book, shelf: string) => void;
 }

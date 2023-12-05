@@ -1,6 +1,7 @@
-import Book from "../Book/Book.tsx";
+import BookItem from "../BookItem/BookItem.tsx";
 import {BookShelfProps} from "../../models/components/props.ts";
 import {FC} from "react";
+import {Book} from "../../models/services/Book.ts";
 
 const BookShelf: FC<BookShelfProps> = (props: BookShelfProps) => {
     return (
@@ -11,7 +12,7 @@ const BookShelf: FC<BookShelfProps> = (props: BookShelfProps) => {
                     {
                         props.books?.map(book =>
                             <li key={book.id}>
-                                <Book book={book} shelf={props.shelf} />
+                                <BookItem book={book} shelf={props.shelf} handleUpdate={(book: Book, shelf: string) => props.handleUpdate(book, shelf)} />
                             </li>
 
                         )

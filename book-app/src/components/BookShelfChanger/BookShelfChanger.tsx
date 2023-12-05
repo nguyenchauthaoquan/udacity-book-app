@@ -1,8 +1,21 @@
-function BookShelfChanger() {
+import {BookShelfChangerProps} from "../../models/components/props.ts";
+import {ChangeEvent, FC, useState} from "react";
+
+const BookShelfChanger: FC<BookShelfChangerProps> = (props: BookShelfChangerProps) => {
+    const [shelfValue, setShelfValue] = useState<string>(props.shelf);
+
+    const handleChangeShelf = (event: ChangeEvent<HTMLSelectElement>) => {
+        setShelfValue(event.target.value);
+
+        console.log(shelfValue)
+
+        props.handleUpdate(props.book, shelfValue)
+    }
+
     return (
         <div className="book-shelf-changer">
-            <select>
-                <option value="none" disabled>
+            <select value={shelfValue} onChange={(event: ChangeEvent<HTMLSelectElement>) => handleChangeShelf(event)}>
+                <option value="move" disabled>
                     Move to...
                 </option>
                 <option value="currentlyReading">

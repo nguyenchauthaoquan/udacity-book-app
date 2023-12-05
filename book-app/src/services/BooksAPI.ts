@@ -27,12 +27,11 @@ export const getAll = async (): Promise<Book[]> => {
 
 
 export const update = async (book: Book, shelf: string) =>
-  await axios.put(`${api}/books/${book.id}`, {
+  await axios.put(`${api}/books/${book.id}`, JSON.stringify({ shelf }), {
     headers: {
       ...headers,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ shelf }),
   }).then((res) => res.data);
 
 export const search = (query: string, maxResults: string) =>

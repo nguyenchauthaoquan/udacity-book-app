@@ -2,24 +2,30 @@
 import {Route, Routes} from "react-router-dom";
 import { useQuery } from 'react-query'
 
-import {getAll, get} from "../../services/BooksAPI.ts"
+import {getAll, update} from "../../services/BooksAPI.ts"
 import '../../assets/styles/css/App.css'
 import { Book } from '../../models/services/Book.ts';
 import ListBooks from "../ListBooks/ListBooks.tsx";
 import {BookShelves} from "../../common/constants.ts";
+import SearchBook from "../SearchBook/SearchBook.tsx";
 
 function App() {
-    const books: Book[]  = useQuery("books", getAll).data ?? [];
-    const { data: book }: { data: Book | undefined } = useQuery(["book", "nggnmAEACAAJ"], () => get("nggnmAEACAAJ"));
+    let books  = useQuery("books", getAll).data ?? [];
+
+    const handleUpdate = async (book: Book, shelf: string) => {
+        await update(book, shelf);
+
+        books = books.filter(b => b.id !== book.id).concat(book)
+    }
 
     console.log(books)
-    console.log(book)
 
     return (
 
         <div className="app">
             <Routes>
-                <Route path={"/"} element={<ListBooks books={books} shelves={BookShelves} />} />
+                <Route path={"/"} element={<ListBooks books={books} shelves={BookShelves} handleUpdate={handleUpdate} />} />
+                <Route path={"search"} element={<SearchBook />} />
             </Routes>
             {
                 /*
