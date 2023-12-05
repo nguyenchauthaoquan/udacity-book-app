@@ -34,13 +34,12 @@ export const update = async (book: Book, shelf: string) =>
     },
   }).then((res) => res.data);
 
-export const search = (query: string, maxResults: string) =>
-  axios.post(`${api}/search`, {
+export const search = (query: string) =>
+  axios.post(`${api}/search`, JSON.stringify({ query }), {
     headers: {
       ...headers,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ query, maxResults }),
   })
     .then((res) => res.data)
     .then((data) => data.books);

@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import {Book} from "../services/Book.ts";
+import {debounce} from "throttle-debounce";
 
 export type ErrorBoundaryProps = {
     children?: ReactNode;
@@ -26,5 +27,13 @@ export type BookProps = {
 export type BookShelfChangerProps = {
     book: Book;
     shelf: string;
+    handleUpdate: (book: Book, shelf: string) => void;
+}
+
+export type SearchBookProps = {
+    searchedBook: Book[];
+    books: Book[];
+    handleResetSearch: () => void;
+    handleSearch: debounce<(query: string) => void>;
     handleUpdate: (book: Book, shelf: string) => void;
 }
