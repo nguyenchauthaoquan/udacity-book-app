@@ -1,4 +1,11 @@
-# React + TypeScript + Vite
+# MyReads: A Book Tracking App
+# Introduction
+## Project Overview
+The project is to create a web application allows you to select and categorizing books you have read, are currently reading or want to read.
+
+# Technologies
+The project is built using the React written by typescript, and use the vite environment to run the application
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -28,3 +35,36 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+# How to run the application locally
+## Installation
+
+1. Clone the project by running the following commands:
+
+```shell
+git clone https://github.com/nguyenchauthaoquan/udacity-book-app.git
+cd book-app
+```
+
+2. Run the application via npm
+
+```shell
+npm install
+npm run start
+```
+
+The terminal displays the following result
+
+```shell
+> book-app@0.0.0 start
+> vite
+
+
+  VITE v5.0.2  ready in 168 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
+```
+
+Visit the link `http://localhost:5173/`

@@ -5,16 +5,16 @@ import {
 } from "react";
 
 const BookShelfChanger: FC<BookShelfChangerProps> = (props: BookShelfChangerProps) => {
-    const shelfRef = useRef<any>(props.shelf)
+    const shelfRef = useRef<any>(props.book.shelf)
 
     const handleChangeShelf = () => {
-        props.handleUpdate(props.book, shelfRef.current.value);
+        props.handleUpdate(props.book, shelfRef?.current.value);
     }
 
     return (
         <div className="book-shelf-changer">
-            <select ref={shelfRef} onChange={handleChangeShelf}>
-                <option value={"moveTo"}>
+            <select ref={shelfRef} value={props.book.shelf} onChange={handleChangeShelf}>
+                <option value={""} disabled>
                     Move to...
                 </option>
                 <option value="currentlyReading">Currently Reading</option>

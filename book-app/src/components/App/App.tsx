@@ -1,5 +1,4 @@
 import {Route, Routes} from "react-router-dom";
-import { useQuery } from 'react-query'
 import {getAll, search, update} from "../../services/BooksAPI.ts"
 import '../../assets/styles/css/App.css'
 import { Book } from '../../models/services/Book.ts';
@@ -10,19 +9,21 @@ import {useEffect, useState} from "react";
 import { debounce } from 'throttle-debounce';
 
 function App() {
-    const {data: books}: { data: Book[] | undefined } = useQuery("books",getAll, {
-        refetchInterval: 1
-    });
-
-    const [booksState, setBooksState] = useState<Book[]>([])
+    const [booksList, setBooksList] = useState<Book[]>([]);
     const [searchedBook, setSearchedBook] = useState<Book[]>([])
 
-    useEffect(() => {
-        setBooksState(books ?? []);
-    }, [books]);
+    const handleGetAllBooks = async () => {
+        const books = await getAll();
+
+        setBooksList(books);
+    }
 
     const handleUpdate = async (book: Book, shelf: string) => {
         await update(book, shelf);
+
+        const books = await getAll();
+
+        setBooksList(books);
     }
 
     const handleSearchBook = debounce(300, (query: string) => {
@@ -39,12 +40,16 @@ function App() {
         setSearchedBook([])
     }
 
+    useEffect(() => {
+        handleGetAllBooks().then();
+    }, []);
+
     return (
 
         <div className="app">
             <Routes>
-                <Route path={"/"} element={<ListBooks books={booksState} shelves={BookShelves} handleUpdate={(book: Book, shelf: string) => handleUpdate(book, shelf)} />} />
-                <Route path={"search"} element={<SearchBook searchedBook={searchedBook} books={booksState} handleSearch={handleSearchBook} handleUpdate={(book: Book, shelf: string) => handleUpdate(book, shelf)} handleResetSearch={() => handleResetSearch()} />} />
+                <Route path={"/"} element={<ListBooks books={booksList ?? []} shelves={BookShelves} handleUpdate={(book: Book, shelf: string) => handleUpdate(book, shelf)} />} />
+                <Route path={"search"} element={<SearchBook searchedBook={searchedBook} books={booksList ?? []} handleSearch={handleSearchBook} handleUpdate={(book: Book, shelf: string) => handleUpdate(book, shelf)} handleResetSearch={() => handleResetSearch()} />} />
             </Routes>
         </div>
     );
