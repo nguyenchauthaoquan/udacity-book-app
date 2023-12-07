@@ -23,7 +23,11 @@ function App() {
 
         const books = await getAll();
 
-        setBooksList(books);
+        if (shelf !== "none") {
+            setBooksList(books);
+        } else {
+            setBooksList(prevState => prevState.filter(b => b.id !== book.id))
+        }
     }
 
     const handleSearchBook = debounce(300, (query: string) => {

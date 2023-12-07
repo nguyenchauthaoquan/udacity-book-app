@@ -3,6 +3,7 @@ import {
     FC,
     useRef,
 } from "react";
+import {BookShelves} from "../../common/constants.ts";
 
 const BookShelfChanger: FC<BookShelfChangerProps> = (props: BookShelfChangerProps) => {
     const shelfRef = useRef<any>(props.book.shelf)
@@ -17,9 +18,12 @@ const BookShelfChanger: FC<BookShelfChangerProps> = (props: BookShelfChangerProp
                 <option value={""} disabled>
                     Move to...
                 </option>
-                <option value="currentlyReading">Currently Reading</option>
-                <option value="wantToRead">Want to Read</option>
-                <option value="read">Read</option>
+                {
+                    Object.entries(BookShelves).map(([key, value] : [key: string, value: string]) =>
+                        <option key={key}  value={key}>{value}</option>
+                    )
+                }
+                <option value="none">None</option>
             </select>
         </div>
     )
