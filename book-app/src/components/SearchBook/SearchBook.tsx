@@ -7,6 +7,7 @@ import BookItem from "../BookItem/BookItem.tsx";
 const SearchBook : FC<SearchBookProps> = (props: SearchBookProps) => {
     const searchBook = useRef<any>("");
 
+
     const handleChange = () => {
         props.handleSearch(searchBook.current.value);
     }
@@ -16,9 +17,9 @@ const SearchBook : FC<SearchBookProps> = (props: SearchBookProps) => {
             if (book.id === searchedItem.id) {
                 searchedItem.shelf = book.shelf
             }
-
             return book;
         })
+        searchedItem.shelf = searchedItem.shelf ? searchedItem.shelf : "none";
 
         return searchedItem;
     }) : []
